@@ -1,8 +1,14 @@
 # IE 7615 Discriminative Deep Learning Project — Group 2
 
-CNN-based automated class attendance system: identify a single-object image by its object ID (Milestone 1), then detect and locate multiple objects in one image (Milestone 2).
-
 **Members:** Yi-Fan Liu, Pooja Yogesh Patil, Hiral Hitesh Rana, Wen-Hsin Su
+
+The goal of this milestone is to identify which object appears in a single-object image. Each student in the class photographed one unique object under different lighting conditions, angles and backgrounds, which gives a 73-class image classification problem (OBJ001 to OBJ073). We used the final merged dataset and the final Object IDs published by the instructors.
+
+Each object has its own folder, and the folder name is the class label. Background-only shots (files marked _bg_) contain no object and are kept for the Week 2 multi-object composites, so they were excluded here. This leaves 6,964 object images, with 90 to 106 images per class (mean 95.4). The classes are close to balanced, so no class weighting was needed. All images were resized to 224 × 224 pixels.
+    
+The data was split 70 / 15 / 15 into training (4,874 images), validation (1,045) and test (1,045) sets. The split is stratified by class with a fixed seed (42), so every object appears in all three sets in the same proportions, and every model was trained and evaluated on the same 	images. The test set has only about 14 to 15 images per class and was used only for final reporting, never for training or model selection.
+
+To reflect the variation in how the photos were taken, the training images were augmented on the fly with random horizontal flips, rotation (±8%), zoom (±15%), translation (±10%), brightness (±20%) and contrast (±20%). Augmentation is active only during training.
 
 ## Milestone 1: Single-object image ID
 
